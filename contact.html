@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비유트립 파트너스 - 입점 문의하기</title>
+    <!-- Tailwind CSS & Custom Brand Color -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            DEFAULT: '#FF5A79',
+                            light: '#FF889F',
+                            dark: '#E0415F',
+                            50: '#FFF0F3',
+                            100: '#FFE1E7',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Pretendard Font -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+    <style>
+        body { font-family: 'Pretendard', sans-serif; overflow-x: hidden; background-color: #f8fafc; }
+        .glass-nav { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0,0,0,0.05); }
+        .hero-gradient { background: linear-gradient(135deg, #111827 0%, #1f2937 100%); }
+        .form-input { 
+            width: 100%; 
+            padding: 1rem 1.25rem; 
+            border-radius: 0.75rem; 
+            border: 1px solid #e2e8f0; 
+            background-color: #f8fafc; 
+            transition: all 0.3s ease; 
+            font-size: 1rem;
+        }
+        .form-input:focus { 
+            outline: none; 
+            border-color: #FF5A79; 
+            background-color: #ffffff;
+            box-shadow: 0 0 0 4px rgba(255, 90, 121, 0.1); 
+        }
+    </style>
+</head>
+<body class="text-gray-800 flex flex-col min-h-screen">
+
+    <!-- 1. 통일된 네비게이션 바 -->
+    <header class="fixed top-0 left-0 w-full z-50 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- 로고 영역 -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="location.href='index.html'">
+                    <div class="w-8 h-8 bg-brand text-white font-bold text-xl flex items-center justify-center rounded-md mr-2">B</div>
+                    <span class="font-black text-2xl tracking-tighter text-gray-900">beyoutrip <span class="text-brand font-bold text-lg">파트너스</span></span>
+                </div>
+                <!-- 메인 메뉴 -->
+                <nav class="hidden md:flex space-x-8 items-center">
+                    <a href="index.html" class="text-gray-600 font-medium hover:text-brand transition">회사소개</a>
+                    
+                    <!-- 마케팅서비스 드롭다운 -->
+                    <div class="relative group py-6">
+                        <a href="#" class="text-gray-600 font-medium hover:text-brand transition flex items-center">
+                            마케팅서비스
+                            <i class="fa-solid fa-chevron-down w-3 h-3 ml-1 text-gray-400 group-hover:text-brand transition"></i>
+                        </a>
+                        <div class="absolute left-1/2 transform -translate-x-1/2 mt-4 w-32 bg-white rounded-xl shadow-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden">
+                            <a href="index.html" class="block px-4 py-3 text-sm text-gray-700 hover:bg-brand-50 hover:text-brand transition text-center">고객유치</a>
+                            <div class="border-b border-gray-50"></div>
+                            <a href="agency.html" class="block px-4 py-3 text-sm text-gray-700 hover:bg-brand-50 hover:text-brand transition text-center">마케팅대행</a>
+                        </div>
+                    </div>
+                    
+                    <a href="#" class="text-gray-600 font-medium hover:text-brand transition">칼럼</a>
+                    <!-- 문의하기 (현재 페이지 활성화) -->
+                    <a href="contact.html" class="text-brand font-bold transition border-b-2 border-brand pb-1">문의하기</a>
+                    
+                    <!-- 상담하기 버튼 (문의하기 페이지로 연동) -->
+                    <a href="contact.html" class="bg-brand text-white px-6 py-2.5 rounded-full text-sm font-bold hover:bg-brand-dark transition shadow-lg shadow-brand/30">상담하기</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. 상단 후킹 섹션 -->
+    <section class="relative pt-32 pb-16 md:pt-40 md:pb-24 hero-gradient text-white overflow-hidden text-center flex-shrink-0">
+        <div class="absolute top-0 right-0 w-1/2 h-full bg-brand blur-[150px] opacity-20 pointer-events-none transform translate-x-1/2"></div>
+        <div class="max-w-4xl mx-auto px-4 relative z-10" data-aos="fade-up">
+            <span class="inline-block py-1 px-4 rounded-full bg-white/10 text-brand-light font-bold text-sm mb-4 border border-white/20">
+                1분이면 충분합니다
+            </span>
+            <h1 class="text-3xl md:text-5xl font-bold mb-6 leading-tight">
+                글로벌 고객 유치와 마케팅,<br>
+                <span class="text-brand">지금 바로 상담을 시작하세요.</span>
+            </h1>
+            <p class="text-gray-300 text-lg md:text-xl font-light">
+                플랫폼 무료 입점부터 전담팀 마케팅 대행까지.<br class="hidden md:block">
+                아래 폼을 남겨주시면 영업일 기준 24시간 내에 담당자가 빠르게 연락드리겠습니다.
+            </p>
+        </div>
+    </section>
+
+    <!-- 3. 문의하기 폼 섹션 -->
+    <section class="py-16 px-4 bg-gray-50 flex-grow -mt-8 relative z-20">
+        <div class="max-w-3xl mx-auto bg-white rounded-3xl shadow-xl border border-gray-100 p-8 md:p-12" data-aos="fade-up" data-aos-delay="100">
+            
+            <form action="#" method="POST" class="space-y-8">
+                
+                <!-- [NEW] 서비스 선택 (카드형 라디오 버튼) -->
+                <div class="mb-4">
+                    <label class="block text-sm font-bold text-gray-700 mb-3">어떤 서비스를 문의하시나요? <span class="text-brand">*</span></label>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- 고객유치 옵션 -->
+                        <label class="relative cursor-pointer">
+                            <input type="radio" name="service_type" value="고객유치" class="peer sr-only" required>
+                            <div class="p-5 border-2 border-gray-200 rounded-xl hover:bg-gray-50 peer-checked:border-brand peer-checked:bg-brand-50 transition-all h-full">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="font-bold text-gray-900 peer-checked:text-brand text-lg">비유트립 플랫폼 입점</span>
+                                    <i class="fa-solid fa-circle-check text-gray-200 peer-checked:text-brand text-2xl transition-colors"></i>
+                                </div>
+                                <p class="text-sm text-gray-500 mt-1 break-keep">입점료 0원. 앱 내 다국어 노출 및 글로벌 방문 고객 유치 (고객유치)</p>
+                            </div>
+                        </label>
+                        <!-- 마케팅대행 옵션 -->
+                        <label class="relative cursor-pointer">
+                            <input type="radio" name="service_type" value="마케팅대행" class="peer sr-only">
+                            <div class="p-5 border-2 border-gray-200 rounded-xl hover:bg-gray-50 peer-checked:border-brand peer-checked:bg-brand-50 transition-all h-full">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="font-bold text-gray-900 peer-checked:text-brand text-lg">종합 마케팅 대행</span>
+                                    <i class="fa-solid fa-circle-check text-gray-200 peer-checked:text-brand text-2xl transition-colors"></i>
+                                </div>
+                                <p class="text-sm text-gray-500 mt-1 break-keep">월 고정비 기반. 전담팀 밀착 관리 및 글로벌 SNS 채널 육성 (에이전시)</p>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <hr class="border-gray-100">
+
+                <!-- 기본 정보 (상호, 업종) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="company" class="block text-sm font-bold text-gray-700 mb-2">상호명 <span class="text-brand">*</span></label>
+                        <input type="text" id="company" name="company" placeholder="예) 상승성형외과" required class="form-input">
+                    </div>
+                    <div>
+                        <!-- [NEW] 업종 텍스트 직접 입력으로 변경 -->
+                        <label for="industry" class="block text-sm font-bold text-gray-700 mb-2">업종 <span class="text-brand">*</span></label>
+                        <input type="text" id="industry" name="industry" placeholder="예) 피부과, 뷰티/네일샵 등" required class="form-input">
+                    </div>
+                </div>
+
+                <!-- 담당자 정보 (직함, 이름) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="position" class="block text-sm font-bold text-gray-700 mb-2">직함 <span class="text-brand">*</span></label>
+                        <input type="text" id="position" name="position" placeholder="예) 원장, 실장, 매니저" required class="form-input">
+                    </div>
+                    <div>
+                        <label for="name" class="block text-sm font-bold text-gray-700 mb-2">담당자 이름 <span class="text-brand">*</span></label>
+                        <input type="text" id="name" name="name" placeholder="담당자 성함을 입력해 주세요" required class="form-input">
+                    </div>
+                </div>
+
+                <!-- 연락 정보 및 시간 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="phone" class="block text-sm font-bold text-gray-700 mb-2">연락처 <span class="text-brand">*</span></label>
+                        <input type="tel" id="phone" name="phone" placeholder="010-0000-0000" required class="form-input">
+                    </div>
+                    <div>
+                        <label for="call_time" class="block text-sm font-bold text-gray-700 mb-2">통화 가능한 시간대 <span class="text-brand">*</span></label>
+                        <input type="text" id="call_time" name="call_time" placeholder="예) 오후 2시 ~ 5시 사이" required class="form-input">
+                    </div>
+                </div>
+
+                <!-- 유입 경로 -->
+                <div>
+                    <label for="source" class="block text-sm font-bold text-gray-700 mb-2">비유트립을 어떻게 알게 되셨나요? <span class="text-brand">*</span></label>
+                    <select id="source" name="source" required class="form-input text-gray-600">
+                        <option value="" disabled selected>선택해 주세요</option>
+                        <option value="구글 검색">구글 검색</option>
+                        <option value="네이버 검색">네이버 검색</option>
+                        <option value="인스타그램">인스타그램 / SNS</option>
+                        <option value="지인 추천">지인 추천</option>
+                        <option value="기타">기타</option>
+                    </select>
+                </div>
+
+                <!-- 내용 -->
+                <div>
+                    <label for="message" class="block text-sm font-bold text-gray-700 mb-2">문의 내용 <span class="text-gray-400 font-normal">(선택)</span></label>
+                    <textarea id="message" name="message" rows="5" placeholder="선택하신 서비스에 대해 추가로 궁금하신 점을 편하게 적어주세요." class="form-input resize-none"></textarea>
+                </div>
+
+                <!-- 개인정보 동의 및 제출 버튼 -->
+                <div class="pt-4 border-t border-gray-100">
+                    <label class="flex items-center space-x-3 cursor-pointer mb-6 group">
+                        <input type="checkbox" required class="w-5 h-5 text-brand rounded border-gray-300 focus:ring-brand accent-brand cursor-pointer">
+                        <span class="text-sm text-gray-600 group-hover:text-gray-900 transition">개인정보 수집 및 이용에 동의합니다. <span class="text-brand">*</span></span>
+                    </label>
+                    
+                    <button type="submit" class="w-full bg-brand hover:bg-brand-dark text-white font-bold text-lg py-5 rounded-xl shadow-[0_10px_20px_rgba(255,90,121,0.2)] hover:shadow-[0_15px_30px_rgba(255,90,121,0.4)] transition-all duration-300 transform hover:-translate-y-1">
+                        무료 상담 제출하기
+                    </button>
+                </div>
+            </form>
+            
+        </div>
+    </section>
+
+    <!-- 4. 푸터 -->
+    <footer class="bg-black text-gray-500 py-12 px-4 text-sm md:text-base border-t border-gray-800 mt-auto flex-shrink-0">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center md:items-start gap-6">
+            <div>
+                <h3 class="text-white font-bold text-xl mb-4">beyoutrip <span class="font-normal text-sm text-gray-500 border-l border-gray-700 pl-2 ml-2">파트너스</span></h3>
+                <p>주식회사 울림기획</p>
+                <p>대표 유동현 <span class="mx-2 text-gray-700">|</span> 사업자등록번호 470-88-02864</p>
+                <p>주소: 서울 금천구 가산디지털2로 135 가산 어반워크 1차 A동 19층</p>
+            </div>
+            <div class="text-center md:text-right">
+                <p class="mb-2">© 2026 beyoutrip Partners. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AOS Script -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ once: false, offset: 50, duration: 800 });
+    </script>
+</body>
+</html>

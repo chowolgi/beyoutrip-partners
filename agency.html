@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비유트립 파트너스 - 글로벌 마케팅 대행 서비스</title>
+    <!-- Tailwind CSS & Custom Brand Color -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            DEFAULT: '#FF5A79',
+                            light: '#FF889F',
+                            dark: '#E0415F',
+                            50: '#FFF0F3',
+                            100: '#FFE1E7',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Pretendard Font -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+    <style>
+        body { font-family: 'Pretendard', sans-serif; overflow-x: hidden; background-color: #f8fafc; }
+        .glass-nav { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0,0,0,0.05); }
+        .hero-gradient { background: linear-gradient(135deg, #111827 0%, #1f2937 100%); }
+        .text-gradient { background: linear-gradient(to right, #FF5A79, #FF889F); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .service-card:hover .service-icon { background-color: #FF5A79; color: white; border-color: #FF5A79; }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- 1. 네비게이션 바 -->
+    <header class="fixed top-0 left-0 w-full z-50 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="location.href='/'">
+                    <div class="w-8 h-8 bg-brand text-white font-bold text-xl flex items-center justify-center rounded-md mr-2">B</div>
+                    <span class="font-black text-2xl tracking-tighter text-gray-900">beyoutrip <span class="text-brand font-bold text-lg">파트너스</span></span>
+                </div>
+                <nav class="hidden md:flex space-x-8 items-center">
+                    <a href="/" class="text-gray-600 font-medium hover:text-brand transition">회사소개</a>
+                    <div class="relative group py-6">
+                        <a href="#" class="text-brand font-bold transition flex items-center">
+                            마케팅서비스
+                            <i class="fa-solid fa-chevron-down w-3 h-3 ml-1 text-brand"></i>
+                        </a>
+                        <!-- 수정된 드롭다운 메뉴 -->
+                        <div class="absolute left-1/2 transform -translate-x-1/2 mt-4 w-32 bg-white rounded-xl shadow-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden">
+                            <a href="#" class="block px-4 py-3 text-sm text-gray-700 hover:bg-brand-50 hover:text-brand transition text-center">고객유치</a>
+                            <div class="border-b border-gray-50"></div>
+                            <!-- 마케팅대행 활성화 상태 -->
+                            <a href="#" class="block px-4 py-3 text-sm font-bold text-brand bg-brand-50 text-center">마케팅대행</a>
+                        </div>
+                    </div>
+                    <a href="#" class="text-gray-600 font-medium hover:text-brand transition">칼럼</a>
+                    <a href="/contact.html" class="text-gray-600 font-medium hover:text-brand transition">문의하기</a>
+                    <!-- 수정된 CTA 버튼 -->
+                    <a href="#apply" class="bg-brand text-white px-6 py-2.5 rounded-full text-sm font-bold hover:bg-brand-dark transition shadow-lg shadow-brand/30">상담하기</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. 히어로 섹션 -->
+    <section class="relative pt-32 pb-20 md:pt-48 md:pb-32 hero-gradient text-white overflow-hidden text-center">
+        <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-full h-full bg-brand blur-[200px] opacity-10 pointer-events-none"></div>
+        <div class="max-w-4xl mx-auto px-4 relative z-10" data-aos="fade-up">
+            <span class="inline-block py-1 px-4 rounded-full bg-white/10 text-brand-light font-bold text-sm mb-6 border border-white/20">
+                프리미엄 글로벌 마케팅 에이전시
+            </span>
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                단순 입점을 넘어,<br>
+                <span class="text-gradient">글로벌 탑 티어 브랜드</span>로.
+            </h1>
+            <p class="text-lg md:text-xl text-gray-300 font-light mb-10 break-keep">
+                플랫폼 수수료 모델을 넘어, 우리 매장만의 독자적인 글로벌 팬덤을 구축하세요.<br>
+                콘텐츠 기획부터 다국어 채널 운영, 인플루언서 섭외까지 전담 마케팅팀이 밀착 관리합니다.
+            </p>
+        </div>
+    </section>
+
+    <!-- 3. 문제 제기 (왜 대행이 필요한가?) -->
+    <section class="py-24 bg-white px-4 text-center">
+        <div class="max-w-4xl mx-auto" data-aos="fade-up">
+            <h2 class="text-3xl md:text-4xl font-bold mb-10 leading-[1.5]">
+                글로벌 고객 유치,<br>
+                <span class="text-brand">플랫폼 입점만으로 충분할까요?</span>
+            </h2>
+            <div class="grid md:grid-cols-3 gap-6 mb-12 text-left">
+                <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 shadow-sm">
+                    <div class="text-brand text-3xl mb-4"><i class="fa-solid fa-language"></i></div>
+                    <h4 class="font-bold mb-2">외국어 콘텐츠의 한계</h4>
+                    <p class="text-gray-500 text-sm">단순 번역기로는 현지 감성과 트렌드를 맞출 수 없어 고객의 이탈이 발생합니다.</p>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 shadow-sm">
+                    <div class="text-brand text-3xl mb-4"><i class="fa-solid fa-users-slash"></i></div>
+                    <h4 class="font-bold mb-2">우리만의 브랜드 팬덤 부재</h4>
+                    <p class="text-gray-500 text-sm">플랫폼 내의 수많은 경쟁 업체 사이에서 우리 병원/매장만의 특별한 매력을 각인시키기 어렵습니다.</p>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 shadow-sm">
+                    <div class="text-brand text-3xl mb-4"><i class="fa-solid fa-chart-line"></i></div>
+                    <h4 class="font-bold mb-2">공격적인 유치 채널 부족</h4>
+                    <p class="text-gray-500 text-sm">기다리는 수동적인 마케팅을 넘어, 샤오홍슈나 인스타그램에서 직접 타겟 고객을 발굴해야 합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. 비유트립 종합 마케팅 대행 서비스 4가지 -->
+    <section class="py-24 bg-gray-50 px-4 border-t-8 border-brand">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="text-brand font-bold tracking-wider text-sm mb-2 block">OUR SERVICES</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">비유트립 글로벌 마케팅 대행</h2>
+                <p class="text-gray-500 text-lg">전담팀이 투입되어 월 고정 비용 이상의 압도적인 전환(매출) 성과를 만듭니다.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- 서비스 1 -->
+                <div class="bg-white p-8 md:p-10 rounded-3xl shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 service-card group" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-16 h-16 bg-gray-50 text-gray-800 rounded-2xl flex items-center justify-center text-3xl mb-6 border border-gray-200 transition-all duration-300 service-icon">
+                        <i class="fa-solid fa-mobile-screen-button"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-gray-900">글로벌 공식 SNS 계정 운영</h3>
+                    <p class="text-gray-600 leading-relaxed mb-4">
+                        샤오홍슈(중국), 틱톡, 글로벌 인스타그램 등 타겟 국가에 맞춘 공식 브랜드 채널을 개설하고 전담 관리합니다. 
+                        현지 알고리즘을 분석하여 자연스러운 팔로워 확보와 브랜딩을 구축합니다.
+                    </p>
+                    <div class="flex gap-2">
+                        <span class="px-3 py-1 bg-gray-100 text-gray-500 text-xs font-bold rounded-md">#채널관리</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-500 text-xs font-bold rounded-md">#샤오홍슈</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-500 text-xs font-bold rounded-md">#브랜딩</span>
+                    </div>
+                </div>
+
+                <!-- 서비스 2 -->
+                <div class="bg-white p-8 md:p-10 rounded-3xl shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 service-card group" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-16 h-16 bg-gray-50 text-gray-800 rounded-2xl flex items-center justify-center text-3xl mb-6 border border-gray-200 transition-all duration-300 service-icon">
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-gray-900">글로벌 인플루언서(KOL/KOC) 마케팅</h3>
+                    <p class="text-gray-600 leading-relaxed mb-4">
+                        수백만 팔로워를 보유한 메가 인플루언서(KOL)부터 전환율이 높은 실사용자(KOC) 체험단까지,
+                        파트너사의 업종과 예산에 맞는 최적의 글로벌 인플루언서를 섭외하여 폭발적인 바이럴을 만듭니다.
+                    </p>
+                    <div class="flex gap-2">
+                        <span class="px-3 py-1 bg-gray-100 text-gray-500 text-xs font-bold rounded-md">#KOL섭외</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-500 text-xs font-bold rounded-md">#체험단</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-500 text-xs font-bold rounded-md">#바이럴마케팅</span>
+                    </div>
+                </div>
+
+                <!-- 서비스 3 -->
+                <div class="bg-white p-8 md:p-10 rounded-3xl shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 service-card group" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-16 h-16 bg-gray-50 text-gray-800 rounded-2xl flex items-center justify-center text-3xl mb-6 border border-gray-200 transition-all duration-300 service-icon">
+                        <i class="fa-solid fa-pen-nib"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-gray-900">다국어 맞춤형 콘텐츠 제작</h3>
+                    <p class="text-gray-600 leading-relaxed mb-4">
+                        단순 번역이 아닙니다. 비유트립의 현지화 에디터와 디자이너가 타겟 국가의 문화와 유행어(밈)를 반영한
+                        카드뉴스, 숏폼(릴스/틱톡), 블로그 칼럼 등 고품질 콘텐츠를 직접 기획하고 제작합니다.
+                    </p>
+                    <div class="flex gap-2">
+                        <span class="px-3 py-1 bg-gray-100 text-gray-500 text-xs font-bold rounded-md">#콘텐츠기획</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-500 text-xs font-bold rounded-md">#숏폼제작</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-500 text-xs font-bold rounded-md">#네이티브번역</span>
+                    </div>
+                </div>
+
+                <!-- 서비스 4 -->
+                <div class="bg-white p-8 md:p-10 rounded-3xl shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 service-card group" data-aos="fade-up" data-aos-delay="400">
+                    <div class="w-16 h-16 bg-gray-50 text-gray-800 rounded-2xl flex items-center justify-center text-3xl mb-6 border border-gray-200 transition-all duration-300 service-icon">
+                        <i class="fa-solid fa-chart-pie"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-gray-900">타겟 맞춤 퍼포먼스 광고</h3>
+                    <p class="text-gray-600 leading-relaxed mb-4">
+                        제작된 콘텐츠를 활용해 구글, 메타(FB/IG), 틱톡 등 글로벌 매체에 스폰서드 광고를 집행합니다.
+                        데이터를 기반으로 A/B 테스트를 진행하며 최저 비용으로 최대의 고객 예약 전환(ROAS)을 이끌어냅니다.
+                    </p>
+                    <div class="flex gap-2">
+                        <span class="px-3 py-1 bg-gray-100 text-gray-500 text-xs font-bold rounded-md">#퍼포먼스광고</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-500 text-xs font-bold rounded-md">#데이터분석</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-500 text-xs font-bold rounded-md">#ROAS최적화</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. 비교 (플랫폼 입점 vs 마케팅 대행) -->
+    <section class="py-24 bg-gray-900 text-white px-4">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl font-bold mb-4">우리 매장에 맞는 서비스는?</h2>
+                <p class="text-gray-400">현재 상황에 맞춰 플랫폼 입점과 종합 마케팅 대행 중 선택하실 수 있습니다.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8" data-aos="fade-up" data-aos-delay="100">
+                <!-- 플랫폼 모델 -->
+                <div class="bg-gray-800 p-8 rounded-3xl border border-gray-700">
+                    <div class="text-gray-400 font-bold mb-2">가볍게 시작하는</div>
+                    <h3 class="text-2xl font-bold mb-6 text-white">비유트립 <span class="text-blue-400">플랫폼 입점</span></h3>
+                    <ul class="space-y-4 mb-8 text-gray-300">
+                        <li class="flex items-center"><i class="fa-solid fa-check text-blue-400 mr-3 w-5 text-center"></i> 비용: <strong class="text-white ml-2">입점료/고정비 0원</strong></li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-blue-400 mr-3 w-5 text-center"></i> 수수료: <strong class="text-white ml-2">실제 방문/결제 시에만 발생</strong></li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-blue-400 mr-3 w-5 text-center"></i> 역할: <strong class="text-white ml-2">비유트립 앱 내 노출 및 예약 접수</strong></li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-blue-400 mr-3 w-5 text-center"></i> 추천대상: <strong class="text-white ml-2">비용 리스크 없이 유치 채널을 늘리고 싶은 곳</strong></li>
+                    </ul>
+                </div>
+                
+                <!-- 마케팅 대행 모델 -->
+                <div class="bg-gray-800 p-8 rounded-3xl border-2 border-brand relative transform md:-translate-y-4 shadow-[0_20px_50px_rgba(255,90,121,0.2)]">
+                    <div class="absolute -top-4 left-8 bg-brand text-white text-xs font-bold px-3 py-1 rounded-full">Premium Service</div>
+                    <div class="text-brand-light font-bold mb-2 mt-2">공격적으로 확장하는</div>
+                    <h3 class="text-2xl font-bold mb-6 text-white">종합 <span class="text-brand">마케팅 대행</span></h3>
+                    <ul class="space-y-4 mb-8 text-gray-300">
+                        <li class="flex items-center"><i class="fa-solid fa-check text-brand mr-3 w-5 text-center"></i> 비용: <strong class="text-white ml-2">월 고정 마케팅 대행비 발생</strong></li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-brand mr-3 w-5 text-center"></i> 수수료: <strong class="text-white ml-2">수수료 없음 (매출 100% 귀속)</strong></li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-brand mr-3 w-5 text-center"></i> 역할: <strong class="text-white ml-2">독자적 글로벌 SNS 운영, 인플루언서 섭외, 광고</strong></li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-brand mr-3 w-5 text-center"></i> 추천대상: <strong class="text-white ml-2">글로벌 랜드마크로 확실히 자리 잡고 싶은 곳</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. 진행 프로세스 -->
+    <section class="py-24 bg-white px-4">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">대행 진행 프로세스</h2>
+                <p class="text-gray-500 text-lg">체계적인 분석과 전략 수립을 통해 완벽한 마케팅을 실행합니다.</p>
+            </div>
+            
+            <div class="flex flex-col md:flex-row gap-6 text-center">
+                <div class="flex-1" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center font-bold text-gray-400 text-xl mx-auto mb-4">01</div>
+                    <h4 class="font-bold text-lg mb-2">상담 및 현황 분석</h4>
+                    <p class="text-sm text-gray-500">매장의 현재 타겟 및 글로벌 인지도를 분석합니다.</p>
+                </div>
+                <div class="hidden md:flex items-center justify-center text-gray-300"><i class="fa-solid fa-chevron-right"></i></div>
+                
+                <div class="flex-1" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center font-bold text-gray-400 text-xl mx-auto mb-4">02</div>
+                    <h4 class="font-bold text-lg mb-2">맞춤 전략 제안</h4>
+                    <p class="text-sm text-gray-500">업종에 맞는 채널 및 월별 예산과 플랜을 기획합니다.</p>
+                </div>
+                <div class="hidden md:flex items-center justify-center text-gray-300"><i class="fa-solid fa-chevron-right"></i></div>
+                
+                <div class="flex-1" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center font-bold text-gray-400 text-xl mx-auto mb-4">03</div>
+                    <h4 class="font-bold text-lg mb-2">계약 및 실행</h4>
+                    <p class="text-sm text-gray-500">전담팀이 배정되어 콘텐츠 제작 및 광고를 즉각 실행합니다.</p>
+                </div>
+                <div class="hidden md:flex items-center justify-center text-gray-300"><i class="fa-solid fa-chevron-right"></i></div>
+                
+                <div class="flex-1" data-aos="fade-up" data-aos-delay="400">
+                    <div class="w-16 h-16 bg-brand-50 text-brand rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4">04</div>
+                    <h4 class="font-bold text-lg mb-2">성과 보고 및 최적화</h4>
+                    <p class="text-sm text-gray-500">매월 성과 리포트를 제공하며 마케팅 효율을 고도화합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. 하단 CTA -->
+    <section id="apply" class="py-24 relative overflow-hidden bg-brand text-center px-4">
+        <div class="relative z-10 max-w-3xl mx-auto" data-aos="zoom-in">
+            <h2 class="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
+                우리 브랜드만을 위한<br>전담 마케팅팀을 세팅하세요.
+            </h2>
+            <p class="text-white/80 text-lg mb-10">매출을 바꾸는 프리미엄 글로벌 마케팅, 지금 바로 상담받아보세요.</p>
+            <a href="/contact.html" class="inline-block bg-white text-brand hover:bg-gray-50 font-bold text-xl py-5 px-14 rounded-full shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                대행 견적 문의하기
+            </a>
+        </div>
+    </section>
+
+    <!-- 8. 푸터 -->
+    <footer class="bg-black text-gray-500 py-12 px-4 text-sm md:text-base flex-shrink-0">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center md:items-start gap-6">
+            <div>
+                <h3 class="text-white font-bold text-xl mb-4">beyoutrip <span class="font-normal text-sm text-gray-500 border-l border-gray-700 pl-2 ml-2">파트너스</span></h3>
+                <p>주식회사 울림기획</p>
+                <p>대표 유동현 <span class="mx-2 text-gray-700">|</span> 사업자등록번호 470-88-02864</p>
+                <p>주소: 서울 금천구 가산디지털2로 135 가산 어반워크 1차 A동 19층</p>
+            </div>
+            <div class="text-center md:text-right">
+                <p class="mb-2">© 2026 beyoutrip Partners. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AOS Script -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ once: false, offset: 50, duration: 800 });
+    </script>
+</body>
+</html>
