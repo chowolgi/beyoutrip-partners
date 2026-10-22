@@ -25,7 +25,7 @@
 </head>
 <body class="text-gray-800 pt-20">
 
-    <!-- 네비게이션 바 (공통) -->
+    <!-- 1. 네비게이션 바 -->
     <header class="fixed top-0 left-0 w-full z-50 glass-nav transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
@@ -35,9 +35,20 @@
                 </div>
                 <nav class="hidden md:flex space-x-8 items-center">
                     <a href="index.html" class="text-gray-600 font-medium hover:text-brand transition">회사소개</a>
-                    <a href="attract.html" class="text-gray-600 font-medium hover:text-brand transition">마케팅서비스</a>
-                    <a href="column.html" class="text-brand font-bold transition border-b-2 border-brand pb-1">칼럼</a>
+                    <div class="relative group py-6">
+                        <a href="#" class="text-gray-600 font-medium hover:text-brand transition flex items-center">
+                            마케팅서비스
+                            <i class="fa-solid fa-chevron-down w-3 h-3 ml-1 text-gray-400 group-hover:text-brand transition"></i>
+                        </a>
+                        <div class="absolute left-1/2 transform -translate-x-1/2 mt-4 w-32 bg-white rounded-xl shadow-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden">
+                            <a href="attract.html" class="block px-4 py-3 text-sm text-gray-700 hover:bg-brand-50 hover:text-brand transition text-center">고객유치</a>
+                            <div class="border-b border-gray-50"></div>
+                            <a href="agency.html" class="block px-4 py-3 text-sm text-gray-700 hover:bg-brand-50 hover:text-brand transition text-center">마케팅대행</a>
+                        </div>
+                    </div>
+                    <a href="column.html" class="text-gray-600 font-medium hover:text-brand transition">칼럼</a>
                     <a href="contact.html" class="text-gray-600 font-medium hover:text-brand transition">문의하기</a>
+                    <a href="contact.html" class="bg-brand text-white px-6 py-2.5 rounded-full text-sm font-bold hover:bg-brand-dark transition shadow-lg shadow-brand/30">상담하기</a>
                 </nav>
             </div>
         </div>
