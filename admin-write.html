@@ -31,7 +31,7 @@
             <h2 class="text-2xl font-bold mb-2">관리자 로그인</h2>
             <p class="text-gray-500 text-sm mb-6">칼럼 작성을 위해 비밀번호를 입력해주세요.</p>
             <!-- 임시 비밀번호: qlqldbdb1! -->
-            <input type="password" id="admin-pw" class="w-full px-4 py-3 border border-gray-300 rounded-xl mb-4 focus:outline-none focus:border-brand" placeholder="비밀번호 입력">
+            <input type="password" id="admin-pw" class="w-full px-4 py-3 border border-gray-300 rounded-xl mb-4 focus:outline-none focus:border-brand" placeholder="비밀번호 입력" onkeyup="if(event.keyCode===13) checkAdmin()">
             <button onclick="checkAdmin()" class="w-full bg-brand text-white font-bold py-3 rounded-xl hover:bg-[#E0415F] transition">로그인</button>
         </div>
     </div>
@@ -91,9 +91,9 @@
                 <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
                     <h3 class="font-bold text-gray-900 mb-4">카테고리</h3>
                     <select id="post-category" class="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-brand">
-                        <option>마케팅 트렌드</option>
-                        <option>성공 사례</option>
-                        <option>플랫폼 소식</option>
+                        <option value="마케팅 트렌드">마케팅 트렌드</option>
+                        <option value="성공 사례">성공 사례</option>
+                        <option value="플랫폼 소식">플랫폼 소식</option>
                     </select>
                 </div>
 
@@ -176,7 +176,12 @@
         function savePost() {
             const title = document.getElementById('post-title').value;
             const category = document.getElementById('post-category').value;
-            const content = quill.root.innerHTML;
+            
+            // 핵심: Quill 에디터의 빈값(<p><br></p>)을 깔끔하게 치환
+            let content = quill.root.innerHTML;
+            if (content === '<p><br></p>') {
+                content = '';
+            }
             
             if(!title.trim()) {
                 alert('제목을 입력해주세요.');
@@ -210,7 +215,7 @@
                     thumbnail: currentThumbnail || defaultThumb,
                     date: new Date().toLocaleDateString('ko-KR')
                 };
-                posts.unshift(newPost);
+                posts.unshift(newPost); // 새 글을 맨 앞에 추가
             }
 
             localStorage.setItem('beyoutrip_posts', JSON.stringify(posts));
