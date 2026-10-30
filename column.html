@@ -46,7 +46,7 @@
                             <a href="agency.html" class="block px-4 py-3 text-sm text-gray-700 hover:bg-brand-50 hover:text-brand transition text-center">마케팅대행</a>
                         </div>
                     </div>
-                    <a href="column.html" class="text-gray-600 font-medium hover:text-brand transition">칼럼</a>
+                    <a href="column.html" class="text-brand font-bold transition">칼럼</a>
                     <a href="contact.html" class="text-gray-600 font-medium hover:text-brand transition">문의하기</a>
                     <a href="contact.html" class="bg-brand text-white px-6 py-2.5 rounded-full text-sm font-bold hover:bg-brand-dark transition shadow-lg shadow-brand/30">상담하기</a>
                 </nav>
@@ -69,7 +69,7 @@
             </a>
         </div>
 
-        <!-- 자바스크립트로 게시글이 렌더링될 영역 -->
+        <!-- 게시글이 렌더링될 영역 -->
         <div id="post-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         </div>
     </section>
@@ -79,12 +79,12 @@
             renderPosts();
         });
 
-        // 로컬 스토리지에서 글 목록을 불러와서 화면에 그리는 함수
+        // 로컬 스토리지에서 글 목록 렌더링
         function renderPosts() {
             const grid = document.getElementById('post-grid');
             let posts = JSON.parse(localStorage.getItem('beyoutrip_posts')) || [];
 
-            // 데이터가 아예 없을 경우를 위한 기본 더미 데이터 생성
+            // 더미 데이터 세팅
             if(posts.length === 0) {
                 posts = [
                     {
@@ -107,17 +107,14 @@
                 localStorage.setItem('beyoutrip_posts', JSON.stringify(posts));
             }
 
-            grid.innerHTML = ''; // 초기화
+            grid.innerHTML = '';
 
-            // 게시글 카드 생성 부분 수정
+            // 카드 생성 (가장 오류가 없는 직접 링크 방식으로 수정)
             posts.forEach(post => {
-                // 본문 텍스트만 추출 (HTML 태그 제거)
                 const plainText = post.content ? post.content.replace(/(<([^>]+)>)/gi, "") : "";
                 
-                // article 태그에 onclick="viewPost(${post.id})" 추가
-                // 버튼들에는 event.stopPropagation() 추가
                 grid.innerHTML += `
-                <article onclick="viewPost(${post.id})" class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-200 hover:shadow-xl hover:border-brand-100 transition duration-300 group cursor-pointer flex flex-col">
+                <article onclick="location.href='column-detail.html?id=${post.id}'" class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-200 hover:shadow-xl hover:border-brand-100 transition duration-300 group cursor-pointer flex flex-col">
                     <div class="h-56 bg-gray-200 overflow-hidden relative">
                         <img src="${post.thumbnail}" alt="썸네일" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                         <span class="absolute top-4 left-4 bg-brand text-white text-xs font-bold px-3 py-1 rounded-full">${post.category}</span>
@@ -128,7 +125,7 @@
                         <div class="flex justify-between items-center text-sm text-gray-400 mt-auto">
                             <span>${post.date}</span>
                             <div class="space-x-2">
-                                <button onclick="event.stopPropagation(); editPost(${post.id})" class="hover:text-brand transition">수정</button>
+                                <button onclick="event.stopPropagation(); location.href='admin-write.html?id=${post.id}'" class="hover:text-brand transition">수정</button>
                                 <button onclick="event.stopPropagation(); deletePost(${post.id})" class="hover:text-red-500 transition">삭제</button>
                             </div>
                         </div>
@@ -136,14 +133,9 @@
                 </article>
                 `;
             });
-        } // <--- 이 중괄호가 빠져 있어서 아래 함수들이 작동하지 않았습니다!
-
-        // 상세 페이지 이동 기능
-        function viewPost(id) {
-            location.href = `column-detail.html?id=${id}`;
         }
 
-        // 게시글 삭제 기능
+        // 삭제 기능
         function deletePost(id) {
             if(confirm('정말 이 칼럼을 삭제하시겠습니까?')) {
                 let posts = JSON.parse(localStorage.getItem('beyoutrip_posts')) || [];
@@ -152,9 +144,6 @@
                 renderPosts();
             }
         }
-
-        // 게시글 수정 기능 (수정 페이지로 이동)
-        function editPost(id) {
-            location.href = `admin-write.html?id=${id}`;
-        }
     </script>
+</body>
+</html>
