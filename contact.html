@@ -111,7 +111,7 @@
     <section class="py-16 px-4 bg-gray-50 flex-grow -mt-8 relative z-20">
         <div class="max-w-3xl mx-auto bg-white rounded-3xl shadow-xl border border-gray-100 p-8 md:p-12" data-aos="fade-up" data-aos-delay="100">
             
-            <form action="#" method="POST" class="space-y-8">
+            <form id="contactForm" class="space-y-8">
                 
                 <!-- [NEW] 서비스 선택 (카드형 라디오 버튼) -->
                 <div class="mb-4">
@@ -235,6 +235,42 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ once: false, offset: 50, duration: 800 });
+    </script>
+
+    <!-- [NEW] 구글 스프레드시트 폼 연동 스크립트 -->
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault(); 
+
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerText;
+            submitBtn.innerText = '제출 중입니다...';
+            submitBtn.disabled = true;
+            submitBtn.classList.add('opacity-70', 'cursor-not-allowed');
+
+            const formData = new FormData(this);
+
+            // ★ 아래 따옴표 안에 3단계에서 복사한 '웹 앱 URL'을 반드시 붙여넣으세요! ★
+            const scriptUrl = 'https://script.google.com/macros/s/AKfycbx7gmpzqWh30eBa8L9e2zGTpMhQun9VYWJjTYZwMkMXXFoyupenwLVNt2c9yL9u1C5cYA/exec';
+
+            fetch(scriptUrl, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                alert('성공적으로 접수되었습니다. 빠르게 연락드리겠습니다!');
+                this.reset(); 
+            })
+            .catch(error => {
+                alert('접수 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+                console.error('Error!', error.message);
+            })
+            .finally(() => {
+                submitBtn.innerText = originalBtnText;
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('opacity-70', 'cursor-not-allowed');
+            });
+        });
     </script>
 </body>
 </html>
