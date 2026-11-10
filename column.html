@@ -93,67 +93,69 @@
             renderPosts();
         });
 
-        // 로컬 스토리지에서 글 목록 렌더링
-        function renderPosts() {
-            const grid = document.getElementById('post-grid');
-            let posts = JSON.parse(localStorage.getItem('beyoutrip_posts')) || [];
-
-            // 더미 데이터 세팅
-            if(posts.length === 0) {
-                posts = [
-                    {
-                        id: 1,
-                        title: '외국인 환자 유치를 위한 2026년 필수 마케팅 전략',
-                        content: '의료 관광을 목적으로 한국을 방문하는 외국인들이 가장 먼저 확인하는 플랫폼은 어디일까요? 성공적인 유치를 위한 첫걸음을 안내합니다.',
-                        category: '마케팅 트렌드',
-                        thumbnail: 'https://images.unsplash.com/photo-1556761175-5973dc0f32d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-                        date: '2026. 10. 22'
-                    },
-                    {
-                        id: 2,
-                        title: '샤오홍슈(小红书) 마케팅으로 매출 300% 상승한 피부과 사례',
-                        content: '중국 고객들의 필수 앱인 샤오홍슈. 인플루언서 리뷰를 통해 어떻게 단기간에 예약률을 높였는지 실제 사례를 분석해 드립니다.',
-                        category: '성공 사례',
-                        thumbnail: 'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-                        date: '2026. 10. 15'
-                    }
-                ];
-                localStorage.setItem('beyoutrip_posts', JSON.stringify(posts));
+       // 로컬 스토리지에서 글 목록 렌더링
+function renderPosts() {
+    const grid = document.getElementById('post-grid');
+    
+    // 최초 실행 시에만 더미 데이터 생성 (localStorage에 초기화 기록이 없을 때)
+    if (!localStorage.getItem('beyoutrip_init')) {
+        const dummyPosts = [
+            {
+                id: 1,
+                title: '외국인 환자 유치를 위한 2026년 필수 마케팅 전략',
+                content: '의료 관광을 목적으로 한국을 방문하는 외국인들이 가장 먼저 확인하는 플랫폼은 어디일까요? 성공적인 유치를 위한 첫걸음을 안내합니다.',
+                category: '마케팅 트렌드',
+                thumbnail: 'https://images.unsplash.com/photo-1556761175-5973dc0f32d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                date: '2026. 10. 22'
+            },
+            {
+                id: 2,
+                title: '샤오홍슈(小红书) 마케팅으로 매출 300% 상승한 피부과 사례',
+                content: '중국 고객들의 필수 앱인 샤오홍슈. 인플루언서 리뷰를 통해 어떻게 단기간에 예약률을 높였는지 실제 사례를 분석해 드립니다.',
+                category: '성공 사례',
+                thumbnail: 'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                date: '2026. 10. 15'
             }
+        ];
+        localStorage.setItem('beyoutrip_posts', JSON.stringify(dummyPosts));
+        localStorage.setItem('beyoutrip_init', 'true'); // 초기화 완료 플래그 설정
+    }
 
-            grid.innerHTML = '';
+    let posts = JSON.parse(localStorage.getItem('beyoutrip_posts')) || [];
+    grid.innerHTML = '';
 
-            // 카드 생성 (에러 없는 100% 확실한 <a> 태그 방식으로 구조 변경)
-            posts.forEach(post => {
-                const plainText = post.content ? post.content.replace(/(<([^>]+)>)/gi, "") : "";
-                
-                grid.innerHTML += `
-                <article class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-200 hover:shadow-xl hover:border-brand-100 transition duration-300 flex flex-col group">
-                    <!-- 상세페이지 링크를 <a> 태그로 직접 연결 -->
-                    <a href="column-detail.html?id=${post.id}" class="block flex-1 flex flex-col cursor-pointer">
-                        <div class="h-56 bg-gray-200 overflow-hidden relative">
-                            <img src="${post.thumbnail}" alt="썸네일" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                            <span class="absolute top-4 left-4 bg-brand text-white text-xs font-bold px-3 py-1 rounded-full">${post.category}</span>
-                        </div>
-                        <div class="p-6 flex-1 flex flex-col">
-                            <h3 class="text-xl font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-brand transition">${post.title}</h3>
-                            <p class="text-gray-500 text-sm mb-4 line-clamp-3 flex-1">${plainText}</p>
-                        </div>
-                    </a>
-                    
-                    <!-- 하단 수정/삭제 버튼 -->
-                    <div class="px-6 pb-6 flex justify-between items-center text-sm text-gray-400 mt-auto border-t border-gray-50 pt-4">
-                        <span>${post.date}</span>
-                        <div class="space-x-3">
-                            <a href="admin-write.html?id=${post.id}" class="hover:text-brand transition cursor-pointer font-medium">수정</a>
-                            <button onclick="deletePost(${post.id})" class="hover:text-red-500 transition cursor-pointer font-medium">삭제</button>
-                        </div>
-                    </div>
-                </article>
-                `;
-            });
-        }
+    if (posts.length === 0) {
+        grid.innerHTML = '<div class="col-span-3 text-center py-20 text-gray-400">등록된 칼럼이 없습니다.</div>';
+        return;
+    }
 
+    posts.forEach(post => {
+        const plainText = post.content ? post.content.replace(/(<([^>]+)>)/gi, "") : "";
+        
+        grid.innerHTML += `
+        <article class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-200 hover:shadow-xl hover:border-brand-100 transition duration-300 flex flex-col group">
+            <a href="column-detail.html?id=${post.id}" class="block flex-1 flex flex-col cursor-pointer">
+                <div class="h-56 bg-gray-200 overflow-hidden relative">
+                    <img src="${post.thumbnail}" alt="썸네일" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <span class="absolute top-4 left-4 bg-brand text-white text-xs font-bold px-3 py-1 rounded-full">${post.category}</span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <h3 class="text-xl font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-brand transition">${post.title}</h3>
+                    <p class="text-gray-500 text-sm mb-4 line-clamp-3 flex-1">${plainText}</p>
+                </div>
+            </a>
+            <div class="px-6 pb-6 flex justify-between items-center text-sm text-gray-400 mt-auto border-t border-gray-50 pt-4">
+                <span>${post.date}</span>
+                <div class="space-x-3">
+                    <a href="admin-write.html?id=${post.id}" class="hover:text-brand transition cursor-pointer font-medium">수정</a>
+                    <button onclick="deletePost(${post.id})" class="hover:text-red-500 transition cursor-pointer font-medium">삭제</a>
+                </div>
+            </div>
+        </article>
+        `;
+    });
+}
+    
         // 삭제 기능
         function deletePost(id) {
             if(confirm('정말 이 칼럼을 삭제하시겠습니까?')) {
