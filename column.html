@@ -18,6 +18,8 @@
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+    <!-- Supabase JS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         body { font-family: 'Pretendard', sans-serif; background-color: #f8fafc; }
         .glass-nav { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0,0,0,0.05); }
@@ -71,6 +73,7 @@
 
         <!-- 게시글이 렌더링될 영역 -->
         <div id="post-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="col-span-3 text-center py-20 text-gray-400 font-medium">게시글을 불러오는 중입니다...</div>
         </div>
     </section>
 
@@ -89,20 +92,33 @@
 
     <!-- 스크립트 영역 -->
     <script>
+        // Supabase 설정
+        const SUPABASE_URL = 'https://xzabrhkfnrnfjgvcynfh.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_BP2LaVSG026H7MblpF3AWQ_s93WlBrG';
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
         document.addEventListener('DOMContentLoaded', () => {
-            renderPosts();
+            fetchPosts();
         });
 
-        // 로컬 스토리지에서 글 목록 렌더링 (더미 자동 생성 기능 완전 제거 버전)
-        function renderPosts() {
+        // Supabase에서 글 목록 불러오기
+        async function fetchPosts() {
             const grid = document.getElementById('post-grid');
             
-            // 저장된 데이터만 그대로 가져옴 (없으면 빈 배열)
-            let posts = JSON.parse(localStorage.getItem('beyoutrip_posts')) || [];
+            const { data: posts, error } = await supabaseClient
+                .from('posts')
+                .select('*')
+                .order('id', { ascending: false });
+
+            if (error) {
+                console.error('Error fetching posts:', error);
+                grid.innerHTML = '<div class="col-span-3 text-center py-20 text-red-400">게시글을 불러오지 못했습니다.</div>';
+                return;
+            }
+
             grid.innerHTML = '';
 
-            // 등록된 글이 없을 때 처리
-            if (posts.length === 0) {
+            if (!posts || posts.length === 0) {
                 grid.innerHTML = '<div class="col-span-3 text-center py-20 text-gray-400 font-medium">등록된 칼럼이 없습니다.</div>';
                 return;
             }
@@ -135,13 +151,20 @@
             });
         }
 
-        // 삭제 기능
-        function deletePost(id) {
+        // Supabase에서 게시글 삭제
+        async function deletePost(id) {
             if(confirm('정말 이 칼럼을 삭제하시겠습니까?')) {
-                let posts = JSON.parse(localStorage.getItem('beyoutrip_posts')) || [];
-                posts = posts.filter(post => post.id !== id);
-                localStorage.setItem('beyoutrip_posts', JSON.stringify(posts));
-                renderPosts();
+                const { error } = await supabaseClient
+                    .from('posts')
+                    .delete()
+                    .eq('id', id);
+
+                if (error) {
+                    alert('삭제 중 오류가 발생했습니다.');
+                    console.error(error);
+                } else {
+                    fetchPosts();
+                }
             }
         }
     </script>
