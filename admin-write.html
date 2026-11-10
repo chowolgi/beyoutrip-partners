@@ -138,11 +138,18 @@
             placeholder: '네이버 블로그처럼 자유롭게 글과 사진을 작성해보세요...'
         });
 
-        // 3. 썸네일 이미지 리사이징 및 압축 함수
+        // 3. 썸네일 이미지 크기 확인 및 압축 (최대 100KB 제한)
         let currentThumbnail = '';
         function previewThumbnail(event) {
             const file = event.target.files[0];
             if (!file) return;
+
+            // 1. 파일 크기가 100KB(102400 바이트)를 초과하는지 검사
+            if (file.size > 100 * 1024) {
+                alert('이미지 용량이 너무 큽니다! 100KB 이하의 이미지를 업로드해주세요.');
+                event.target.value = ''; // 파일 선택 초기화
+                return;
+            }
 
             const reader = new FileReader();
             reader.onload = function(e) {
