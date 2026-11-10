@@ -27,10 +27,9 @@
     <!-- 관리자 로그인 모달 -->
     <div id="login-modal" class="fixed inset-0 bg-gray-900/90 z-50 flex items-center justify-center backdrop-blur-sm">
         <div class="bg-white p-8 rounded-2xl shadow-2xl max-w-sm w-full text-center">
-            <div class="w-16 h-16 bg-brand-50 text-brand rounded-full flex items-center justify-center text-2xl mx-auto mb-4"><i class="fa-solid fa-lock"></i></div>
+            <div class="w-16 h-16 bg-pink-50 text-brand rounded-full flex items-center justify-center text-2xl mx-auto mb-4"><i class="fa-solid fa-lock"></i></div>
             <h2 class="text-2xl font-bold mb-2">관리자 로그인</h2>
             <p class="text-gray-500 text-sm mb-6">칼럼 작성을 위해 비밀번호를 입력해주세요.</p>
-            <!-- 임시 비밀번호: qlqldbdb1! -->
             <input type="password" id="admin-pw" class="w-full px-4 py-3 border border-gray-300 rounded-xl mb-4 focus:outline-none focus:border-brand" placeholder="비밀번호 입력" onkeyup="if(event.keyCode===13) checkAdmin()">
             <button onclick="checkAdmin()" class="w-full bg-brand text-white font-bold py-3 rounded-xl hover:bg-[#E0415F] transition">로그인</button>
         </div>
@@ -101,7 +100,7 @@
                     <h3 class="font-bold text-gray-900 mb-4">썸네일 이미지</h3>
                     <div class="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center cursor-pointer hover:bg-gray-50 transition" onclick="document.getElementById('thumbnail-input').click();">
                         <i class="fa-regular fa-image text-3xl text-gray-400 mb-2"></i>
-                        <p class="text-sm text-gray-500">클릭하여 이미지 업로드</p>
+                        <p class="text-sm text-gray-500">클릭하여 이미지 업로드 (자동 압축)</p>
                     </div>
                     <input type="file" id="thumbnail-input" class="hidden" accept="image/*" onchange="previewThumbnail(event)">
                     <img id="thumbnail-preview" alt="썸네일 미리보기">
@@ -132,19 +131,50 @@
             placeholder: '네이버 블로그처럼 자유롭게 글과 사진을 작성해보세요...'
         });
 
-        // 3. 썸네일 이미지 미리보기 기능
+        // 3. 썸네일 이미지 리사이징 및 압축 함수 (localStorage 용량 초과 방지)
         let currentThumbnail = '';
         function previewThumbnail(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
             const reader = new FileReader();
-            reader.onload = function(){
-                const output = document.getElementById('thumbnail-preview');
-                output.src = reader.result;
-                output.style.display = 'block';
-                currentThumbnail = reader.result;
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    const MAX_WIDTH = 800; // 최대 너비 제한
+                    const MAX_HEIGHT = 600; // 최대 높이 제한
+                    let width = img.width;
+                    let height = img.height;
+
+                    if (width > height) {
+                        if (width > MAX_WIDTH) {
+                            height *= MAX_WIDTH / width;
+                            width = MAX_WIDTH;
+                        }
+                    } else {
+                        if (height > MAX_HEIGHT) {
+                            width *= MAX_HEIGHT / height;
+                            height = MAX_HEIGHT;
+                        }
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    // JPEG 70% 품질로 압축하여 Base64 변환 (용량 대폭 축소)
+                    const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.7);
+
+                    const output = document.getElementById('thumbnail-preview');
+                    output.src = compressedDataUrl;
+                    output.style.display = 'block';
+                    currentThumbnail = compressedDataUrl;
+                };
+                img.src = e.target.result;
             };
-            if(event.target.files[0]){
-                reader.readAsDataURL(event.target.files[0]);
-            }
+            reader.readAsDataURL(file);
         }
 
         // 수정 모드 확인 함수
@@ -172,12 +202,11 @@
             }
         }
 
-        // 4. 발행하기 (로컬 스토리지에 저장)
+        // 4. 발행하기 (안전한 예외 처리 및 로컬 스토리지 저장)
         function savePost() {
             const title = document.getElementById('post-title').value;
             const category = document.getElementById('post-category').value;
             
-            // 핵심: Quill 에디터의 빈값(<p><br></p>)을 깔끔하게 치환
             let content = quill.root.innerHTML;
             if (content === '<p><br></p>') {
                 content = '';
@@ -192,7 +221,6 @@
             const defaultThumb = 'https://images.unsplash.com/photo-1556761175-5973dc0f32d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
 
             if (editPostId) {
-                // 기존 글 수정
                 posts = posts.map(post => {
                     if(post.id === editPostId) {
                         return {
@@ -206,7 +234,6 @@
                     return post;
                 });
             } else {
-                // 새 글 작성
                 const newPost = {
                     id: Date.now(),
                     title: title,
@@ -215,12 +242,18 @@
                     thumbnail: currentThumbnail || defaultThumb,
                     date: new Date().toLocaleDateString('ko-KR')
                 };
-                posts.unshift(newPost); // 새 글을 맨 앞에 추가
+                posts.unshift(newPost);
             }
 
-            localStorage.setItem('beyoutrip_posts', JSON.stringify(posts));
-            alert('성공적으로 발행되었습니다.');
-            location.href = 'column.html';
+            // try-catch 구문으로 localStorage 용량 초과 에러 방어
+            try {
+                localStorage.setItem('beyoutrip_posts', JSON.stringify(posts));
+                alert('성공적으로 발행되었습니다.');
+                location.href = 'column.html';
+            } catch (e) {
+                console.error(e);
+                alert('저장 공간이 부족합니다! 업로드한 이미지 용량이 너무 큽니다. 더 작은 이미지를 사용해 주세요.');
+            }
         }
     </script>
 </body>
