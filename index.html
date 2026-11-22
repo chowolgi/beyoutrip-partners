@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>비유트립 파트너스 - 외국인 고객 유치 플랫폼</title>
+    <title>비유트립 파트너스 - 회사소개 · 외국인 고객 유치 플랫폼</title>
     <!-- Tailwind CSS & Custom Brand Color -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -17,7 +17,8 @@
                             dark: '#E0415F',
                             50: '#FFF0F3',
                             100: '#FFE1E7',
-                        }
+                        },
+                        beige: '#FCF9F8'
                     },
                     animation: {
                         'bounce-slow': 'bounce 3s infinite',
@@ -26,7 +27,7 @@
             }
         }
     </script>
-    <!-- FontAwesome (채널 로고 및 플레이 아이콘) -->
+    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- AOS Animation CSS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -35,7 +36,7 @@
     <!-- Pretendard Font -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
     <style>
-        body { font-family: 'Pretendard', sans-serif; overflow-x: hidden; background-color: #f8fafc; }
+        body { font-family: 'Pretendard', sans-serif; overflow-x: hidden; background-color: #f8fafc; word-break: keep-all; }
         .glass-nav { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0,0,0,0.05); }
         .hero-gradient { background: linear-gradient(135deg, #111827 0%, #1f2937 100%); }
         .text-gradient { background: linear-gradient(to right, #FF5A79, #FF889F); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
@@ -50,16 +51,49 @@
         details[open] summary ~ * { animation: fadeIn 0.4s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
         
-        /* Swiper 무한 스크롤(Marquee)을 위한 추가 */
-        .contentSwiper .swiper-wrapper {
-            transition-timing-function: linear !important;
+        /* Swiper 무한 스크롤 */
+        .contentSwiper .swiper-wrapper { transition-timing-function: linear !important; }
+
+        /* 퀵 메뉴 CSS */
+        .quick {
+            position: fixed; right: 26px; top: 50%; translate: 0 -50%; z-index: 90;
+            display: flex; flex-direction: column; gap: 10px;
+            opacity: 0; visibility: hidden; transform: translateX(14px);
+            transition: opacity 0.4s, transform 0.4s, visibility 0.4s;
+        }
+        .quick.show { opacity: 1; visibility: visible; transform: none; }
+        .quick a, .quick button {
+            width: 84px; padding: 19px 8px; border-radius: 20px; text-decoration: none;
+            display: flex; flex-direction: column; align-items: center; gap: 9px; cursor: pointer;
+            font-family: inherit; font-size: 13px; font-weight: 800; line-height: 1.35; text-align: center;
+            transition: transform 0.25s;
+        }
+        .quick a:hover, .quick button:hover { transform: translateY(-3px); }
+        .q-main {
+            background: var(--brand, #FF5A79); color: #fff; border: 0;
+            box-shadow: 0 16px 34px -12px rgba(255,90,121,0.6);
+            animation: qb 2.8s ease-in-out infinite;
+        }
+        @keyframes qb {
+            0%, 100% { box-shadow: 0 16px 34px -12px rgba(255,90,121,0.55); }
+            50% { box-shadow: 0 18px 44px -10px rgba(255,90,121,0.95); }
+        }
+        .q-sub, .q-top {
+            background: #fff; color: #111827; border: 1px solid #d1d5db;
+            box-shadow: 0 14px 30px -16px rgba(17,24,39,0.35);
+        }
+        .q-top { color: #6b7280; padding: 15px 8px; font-size: 12px; letter-spacing: 0.1em; }
+        @media (max-width: 900px) {
+            .quick { right: 14px; top: auto; bottom: 18px; translate: 0 0; flex-direction: row; }
+            .quick a, .quick button { width: auto; flex-direction: row; padding: 15px 20px; border-radius: 999px; font-size: 14px; }
+            .q-top { display: none; }
         }
     </style>
 </head>
 <body class="text-gray-800">
 
     <!-- 1. 네비게이션 바 -->
-    <header class="fixed top-0 left-0 w-full z-50 glass-nav transition-all duration-300">
+    <header class="fixed top-0 left-0 w-full z-50 glass-nav transition-all duration-300" id="main-header">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="location.href='index.html'">
@@ -67,7 +101,7 @@
                     <span class="font-black text-2xl tracking-tighter text-gray-900">beyoutrip <span class="text-brand font-bold text-lg">파트너스</span></span>
                 </div>
                 <nav class="hidden md:flex space-x-8 items-center">
-                    <a href="index.html" class="text-gray-600 font-medium hover:text-brand transition">회사소개</a>
+                    <a href="index.html" class="text-brand font-bold transition border-b-2 border-transparent hover:border-brand pb-1">회사소개</a>
                     <div class="relative group py-6">
                         <a href="#" class="text-gray-600 font-medium hover:text-brand transition flex items-center">
                             마케팅서비스
@@ -88,7 +122,7 @@
     </header>
 
     <!-- 2. 히어로 섹션 -->
-    <section class="relative pt-32 pb-20 md:pt-48 md:pb-32 hero-gradient text-white overflow-hidden text-center md:text-left">
+    <section id="hero" class="relative pt-32 pb-20 md:pt-48 md:pb-32 hero-gradient text-white overflow-hidden text-center md:text-left">
         <div class="absolute top-0 right-0 w-1/2 h-full bg-brand blur-[150px] opacity-20 pointer-events-none transform translate-x-1/2"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="grid md:grid-cols-2 gap-12 items-center">
@@ -194,45 +228,104 @@
         </div>
     </section>
 
-    <!-- 5. 모집 카테고리 -->
-    <section id="categories" class="py-24 bg-gray-50 px-4">
-        <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <span class="text-brand font-bold tracking-wider text-sm mb-2 block">PARTNER CATEGORIES</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">이런 파트너스 분들을 기다립니다</h2>
-                <p class="text-gray-500 text-lg">K-뷰티와 의료, 웰니스 관광을 선도할 모든 업종이 입점 가능합니다.</p>
-            </div>
+    <!-- ★ 5. 캐릭터 세계관: 비비(BeBe) & 유유(YouYou) - 박스(테두리) 제거 디자인 적용 ★ -->
+    <section id="characters" class="py-24 bg-beige px-4">
+        <div class="max-w-5xl mx-auto">
             
-            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
-                <div class="p-6 bg-white rounded-2xl border border-gray-200 hover:border-brand hover:shadow-md transition" data-aos="zoom-in" data-aos-delay="50">
-                    <div class="text-4xl mb-3 text-brand"><i class="fa-solid fa-stethoscope"></i></div><h4 class="font-bold">피부과</h4>
+            <!-- 캐릭터 상단 헤더 -->
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="text-gray-400 font-bold tracking-widest text-xs uppercase block mb-3">CHARACTER</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">달에서 온 쌍둥이 토끼 자매, 비비와 유유</h2>
+                <p class="text-gray-500 text-base">콘셉트와 세계관, 이름과 성격을 정하고 3D 캐릭터로 완성했습니다.</p>
+            </div>
+
+            <!-- 캐릭터 디자인 영역 (테두리 및 배경 박스 제거) -->
+            <div class="grid md:grid-cols-2 gap-12 mb-16">
+                <!-- 비비 -->
+                <div class="text-left" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-center justify-center mb-8 h-80">
+                        <img src="bibi.webp" alt="비비" class="h-full object-contain drop-shadow-xl">
+                    </div>
+                    <div>
+                        <h3 class="text-3xl font-bold text-gray-900 flex items-baseline gap-2 mb-3">
+                            비비 <span class="text-gray-500 text-lg font-normal">BeBe</span>
+                        </h3>
+                        <p class="text-brand font-bold mb-4">쌍둥이 언니 · 꼼꼼한 검증 담당</p>
+                        <p class="text-gray-600 leading-relaxed break-keep">
+                            믿을 수 있는 뷰티 업체를 꼼꼼히 살피는 언니. 가격과 외국어 응대, 후기를 하나하나 확인해야 마음이 놓입니다.<br><br>
+                            비유트립의 'Safe Choice'가 바로 비비의 일입니다.
+                        </p>
+                    </div>
                 </div>
-                <div class="p-6 bg-white rounded-2xl border border-gray-200 hover:border-brand hover:shadow-md transition" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="text-4xl mb-3 text-brand"><i class="fa-solid fa-wand-magic-sparkles"></i></div><h4 class="font-bold">성형외과</h4>
+
+                <!-- 유유 -->
+                <div class="text-left" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex items-center justify-center mb-8 h-80">
+                        <img src="yuyu.webp" alt="유유" class="h-full object-contain drop-shadow-xl">
+                    </div>
+                    <div>
+                        <h3 class="text-3xl font-bold text-gray-900 flex items-baseline gap-2 mb-3">
+                            유유 <span class="text-gray-500 text-lg font-normal">YouYou</span>
+                        </h3>
+                        <p class="text-brand font-bold mb-4">쌍둥이 동생 · 다정한 동행 담당</p>
+                        <p class="text-gray-600 leading-relaxed break-keep">
+                            여행자들이 낯선 서울에서도 편안하게 아름다움을 찾아갈 수 있도록 곁을 지키는 동생. 가슴의 비유트립 배지는 서울이 좋아서 직접 만든 이름표입니다.
+                        </p>
+                    </div>
                 </div>
-                <div class="p-6 bg-white rounded-2xl border border-gray-200 hover:border-brand hover:shadow-md transition" data-aos="zoom-in" data-aos-delay="150">
-                    <div class="text-4xl mb-3 text-brand"><i class="fa-solid fa-leaf"></i></div><h4 class="font-bold">한의원</h4>
+            </div>
+
+            <!-- 스토리 인용구 영역 -->
+            <div class="mb-20 max-w-4xl mx-auto" data-aos="fade-up">
+                <div class="border-l-4 border-brand pl-6 md:pl-8 py-2">
+                    <p class="text-gray-600 text-sm md:text-base leading-relaxed break-keep">
+                        비유트립의 마스코트는 한국·일본·중국·베트남 등 아시아 여러 나라에 전해지는 '달토끼' 설화에서 출발했습니다. 같은 보름달 아래 태어난 쌍둥이 토끼 자매 비비와 유유가 추석날 밤 우연히 서울에 떨어지면서, 외국인 여행자들을 위한 뷰티 가이드로 거듭나는 이야기입니다. 두 자매의 이름을 합치면 <span class="text-brand font-bold">Be You</span>. 비유트립이 추구하는 '가장 나다운 나를 만나는 여행'을 상징합니다.
+                    </p>
+                    <details class="mt-4">
+                        <summary class="font-bold text-gray-900 text-sm border-b border-gray-900 inline-block pb-0.5 cursor-pointer hover:text-brand hover:border-brand transition">
+                            캐릭터 이야기 전체 보기
+                        </summary>
+                        <p class="mt-4 text-gray-500 text-sm leading-relaxed break-keep">
+                            비유트립을 할인 예약 앱이 아니라 ‘처음 한국을 찾는 외국인이 믿고 따라가는 뷰티 가이드’로 포지셔닝하고, 달토끼 설화에서 출발한 쌍둥이 토끼 자매 비비와 유유를 만들어 브랜드의 얼굴로 세웠습니다.
+                        </p>
+                    </details>
                 </div>
-                <div class="p-6 bg-white rounded-2xl border border-gray-200 hover:border-brand hover:shadow-md transition" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="text-4xl mb-3 text-brand"><i class="fa-solid fa-tooth"></i></div><h4 class="font-bold">치과</h4>
+            </div>
+
+            <!-- 4가지 컨셉 라인 영역 -->
+            <div class="grid md:grid-cols-2 gap-x-12 gap-y-10" data-aos="fade-up">
+                <div class="border-t-2 border-brand pt-4">
+                    <div class="text-gray-400 font-bold text-xs tracking-wider mb-2">01 CONCEPT</div>
+                    <h4 class="font-bold text-gray-900 mb-3 text-lg">모두가 아는 이야기</h4>
+                    <p class="text-gray-500 text-sm leading-relaxed break-keep">핵심 시장인 한국·일본·중국·베트남이 모두 아는 '달토끼' 설화를 뿌리로 정해, 나라마다 따로 설명하지 않아도 친숙하게 했습니다.</p>
                 </div>
-                <div class="p-6 bg-white rounded-2xl border border-gray-200 hover:border-brand hover:shadow-md transition" data-aos="zoom-in" data-aos-delay="250">
-                    <div class="text-4xl mb-3 text-brand"><i class="fa-solid fa-person-pregnant"></i></div><h4 class="font-bold">산부인과</h4>
+                <div class="border-t-2 border-brand pt-4">
+                    <div class="text-gray-400 font-bold text-xs tracking-wider mb-2">02 STORY</div>
+                    <h4 class="font-bold text-gray-900 mb-3 text-lg">서비스를 이야기로</h4>
+                    <p class="text-gray-500 text-sm leading-relaxed break-keep">업체 검증은 언니 비비, 여행자 동행은 동생 유유. 비유트립의 실제 서비스를 두 캐릭터의 역할로 옮겼습니다.</p>
                 </div>
-                <div class="p-6 bg-white rounded-2xl border border-gray-200 hover:border-brand hover:shadow-md transition" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="text-4xl mb-3 text-brand"><i class="fa-solid fa-scissors"></i></div><h4 class="font-bold">미용실</h4>
+                <div class="border-t-2 border-brand pt-4">
+                    <div class="text-gray-400 font-bold text-xs tracking-wider mb-2">03 NAMING</div>
+                    <h4 class="font-bold text-gray-900 mb-3 text-lg">합치면 Be You</h4>
+                    <p class="text-gray-500 text-sm leading-relaxed break-keep">일본어·중국어·베트남어 화자도 쉽게 부를 수 있는 반복형 이름으로, 둘을 합치면 브랜드 메시지가 됩니다.</p>
                 </div>
-                <div class="p-6 bg-white rounded-2xl border border-gray-200 hover:border-brand hover:shadow-md transition" data-aos="zoom-in" data-aos-delay="350">
-                    <div class="text-4xl mb-3 text-brand"><i class="fa-solid fa-palette"></i></div><h4 class="font-bold">퍼스널컬러</h4>
+                <div class="border-t-2 border-brand pt-4">
+                    <div class="text-gray-400 font-bold text-xs tracking-wider mb-2">04 DESIGN</div>
+                    <h4 class="font-bold text-gray-900 mb-3 text-lg">만지고 싶은 3D</h4>
+                    <p class="text-gray-500 text-sm leading-relaxed break-keep">같은 실루엣과 의상(데님 멜빵바지, 하트 선글라스)에 하양과 분홍으로 자매를 나눠, 인형 같은 질감의 3D로 완성했습니다.</p>
                 </div>
-                <div class="p-6 bg-white rounded-2xl border border-gray-200 hover:border-brand hover:shadow-md transition" data-aos="zoom-in" data-aos-delay="400">
-                    <div class="text-4xl mb-3 text-brand"><i class="fa-solid fa-hand-sparkles"></i></div><h4 class="font-bold">네일</h4>
-                </div>
-                <div class="p-6 bg-white rounded-2xl border border-gray-200 hover:border-brand hover:shadow-md transition" data-aos="zoom-in" data-aos-delay="450">
-                    <div class="text-4xl mb-3 text-brand"><i class="fa-solid fa-spa"></i></div><h4 class="font-bold">에스테틱</h4>
-                </div>
-                <div class="p-6 bg-white rounded-2xl border border-gray-200 hover:border-brand hover:shadow-md transition" data-aos="zoom-in" data-aos-delay="500">
-                    <div class="text-4xl mb-3 text-brand"><i class="fa-solid fa-bed"></i></div><h4 class="font-bold">숙박</h4>
+            </div>
+
+            <!-- 스케치 로고 과정 영역 -->
+            <div class="mt-32 text-center" data-aos="fade-up">
+                <span class="text-gray-400 font-bold tracking-widest text-xs uppercase block mb-3">MASCOT &amp; LOGO DEVELOPMENT</span>
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">스케치에서 최종 캐릭터와 로고까지</h2>
+                <p class="text-gray-500 text-sm md:text-base mb-12 break-keep">
+                    초기 스케치와 표정·디테일 연구,<br>컬러·소재 방향을 거쳐 캐릭터와 로고를 함께 다듬었습니다.
+                </p>
+                <!-- 이미지 삽입 영역 -->
+                <div class="w-full bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden flex items-center justify-center p-4 md:p-8">
+                    <img src="Sketch.webp" alt="캐릭터 및 로고 디자인 과정" class="w-full h-auto object-contain rounded-2xl">
                 </div>
             </div>
         </div>
@@ -314,7 +407,7 @@
         </div>
     </section>
 
-    <!-- 7. 글로벌 홍보 채널 (위치 변경 및 숏폼 자동재생 반영) -->
+    <!-- 7. 글로벌 홍보 채널 -->
     <section class="py-24 bg-white px-4 border-b border-gray-100 overflow-hidden">
         <div class="max-w-7xl mx-auto text-center mb-12" data-aos="fade-up">
             <span class="text-gray-400 font-bold tracking-widest text-xs mb-2 block uppercase">Localization · Local Content</span>
@@ -343,7 +436,6 @@
 
         <div class="max-w-[1400px] mx-auto swiper contentSwiper pb-12" data-aos="fade-up" data-aos-delay="200">
             <div class="swiper-wrapper">
-                <!-- 영상 1: 틱톡 -->
                 <div class="swiper-slide w-[260px] md:w-[280px]">
                     <a href="https://www.tiktok.com/@kim.minn/video/7659692522393931028" target="_blank" class="block relative w-full h-[480px] rounded-2xl overflow-hidden group shadow-lg">
                         <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0 bg-gray-800" src="./local-video-01.mp4"></video>
@@ -357,7 +449,6 @@
                         </div>
                     </a>
                 </div>
-                <!-- 영상 2: 인스타 -->
                 <div class="swiper-slide w-[260px] md:w-[280px]">
                     <a href="https://www.instagram.com/reel/Da2OfiYvaug/?utm_source=ig_web_button_share_sheet" target="_blank" class="block relative w-full h-[480px] rounded-2xl overflow-hidden group shadow-lg">
                         <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0 bg-gray-800" src="./local-video-02.mp4"></video>
@@ -371,7 +462,6 @@
                         </div>
                     </a>
                 </div>
-                <!-- 영상 3: 샤오홍슈 -->
                 <div class="swiper-slide w-[260px] md:w-[280px]">
                     <a href="https://www.rednote.com/discovery/item/6acc550b000000001a023138?source=webshare&xhsshare=pc_web&xsec_token=ABISfQfGpkpjFZlDVs73DUZIao1-zrVkdOIRReNl4pIpc=&xsec_source=pc_share" target="_blank" class="block relative w-full h-[480px] rounded-2xl overflow-hidden group shadow-lg">
                         <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0 bg-gray-800" src="./local-video-03.mp4"></video>
@@ -385,7 +475,6 @@
                         </div>
                     </a>
                 </div>
-                <!-- 영상 4: 샤오홍슈 -->
                 <div class="swiper-slide w-[260px] md:w-[280px]">
                     <a href="https://www.rednote.com/discovery/item/6a2f5780000000001c024237?source=webshare&xhsshare=pc_web&xsec_token=ABxKAcgIUOeWr0k3qbfRO9x2co0ARk86Xqpka9wbrGKdI=&xsec_source=pc_share" target="_blank" class="block relative w-full h-[480px] rounded-2xl overflow-hidden group shadow-lg">
                         <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0 bg-gray-800" src="./local-video-04.mp4"></video>
@@ -399,7 +488,6 @@
                         </div>
                     </a>
                 </div>
-                <!-- 영상 5: 인스타 -->
                 <div class="swiper-slide w-[260px] md:w-[280px]">
                     <a href="https://www.instagram.com/reel/Dac3Mq6xKEi/?utm_source=ig_web_button_share_sheet" target="_blank" class="block relative w-full h-[480px] rounded-2xl overflow-hidden group shadow-lg">
                         <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0 bg-gray-800" src="./local-video-05.mp4"></video>
@@ -409,11 +497,10 @@
                                 <div class="w-7 h-7 bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-500 rounded-full flex items-center justify-center text-sm"><i class="fa-brands fa-instagram"></i></div>
                                 <span class="text-xs font-bold opacity-90">Instagram Reels</span>
                             </div>
-                            <p class="text-sm font-medium line-clamp-2">비유트립 인스타그램 릴스 리뷰 2</p>
+                            <p class="text-sm font-medium line-clamp-2">서울 라이프스타일 &amp; 뷰티 체험 릴스</p>
                         </div>
                     </a>
                 </div>
-                <!-- 영상 6: 샤오홍슈 -->
                 <div class="swiper-slide w-[260px] md:w-[280px]">
                     <a href="https://www.rednote.com/discovery/item/6a6b40980000000027022e02?source=webshare&xhsshare=pc_web&xsec_token=ABjxoFFmbAiggjxn28YlqWbp7XiU4x2F7XIJdTbh40Imo=&xsec_source=pc_share" target="_blank" class="block relative w-full h-[480px] rounded-2xl overflow-hidden group shadow-lg">
                         <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0 bg-gray-800" src="./local-video-06.mp4"></video>
@@ -431,7 +518,7 @@
         </div>
     </section>
 
-    <!-- 8. 성과 증명 (RESULT) 섹션 - 위치 변경 -->
+    <!-- 8. 성과 증명 (RESULT) 섹션 -->
     <section class="py-24 bg-brand text-center px-4 relative overflow-hidden">
         <div class="max-w-6xl mx-auto relative z-10" data-aos="fade-up">
             <span class="text-white/80 font-bold tracking-widest text-sm mb-4 block uppercase">Result</span>
@@ -462,7 +549,31 @@
         </div>
     </section>
 
-    <!-- 9. 입점 프로세스 -->
+    <!-- 9. 모집 카테고리 -->
+    <section id="categories" class="py-24 bg-gray-50 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="text-brand font-bold tracking-wider text-sm mb-2 block">PARTNER CATEGORIES</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">이런 파트너스 분들을 기다립니다</h2>
+                <p class="text-gray-500 text-lg">K-뷰티와 의료, 웰니스 관광을 선도할 모든 업종이 입점 가능합니다.</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
+                <div class="p-6 bg-white rounded-2xl border border-gray-200 hover:border-brand hover:shadow-md transition" data-aos="zoom-in" data-aos-delay="50"><div class="text-4xl mb-3 text-brand"><i class="fa-solid fa-stethoscope"></i></div><h4 class="font-bold">피부과</h4></div>
+                <div class="p-6 bg-white rounded-2xl border border-gray-200 hover:border-brand hover:shadow-md transition" data-aos="zoom-in" data-aos-delay="100"><div class="text-4xl mb-3 text-brand"><i class="fa-solid fa-wand-magic-sparkles"></i></div><h4 class="font-bold">성형외과</h4></div>
+                <div class="p-6 bg-white rounded-2xl border border-gray-200 hover:border-brand hover:shadow-md transition" data-aos="zoom-in" data-aos-delay="150"><div class="text-4xl mb-3 text-brand"><i class="fa-solid fa-leaf"></i></div><h4 class="font-bold">한의원</h4></div>
+                <div class="p-6 bg-white rounded-2xl border border-gray-200 hover:border-brand hover:shadow-md transition" data-aos="zoom-in" data-aos-delay="200"><div class="text-4xl mb-3 text-brand"><i class="fa-solid fa-tooth"></i></div><h4 class="font-bold">치과</h4></div>
+                <div class="p-6 bg-white rounded-2xl border border-gray-200 hover:border-brand hover:shadow-md transition" data-aos="zoom-in" data-aos-delay="250"><div class="text-4xl mb-3 text-brand"><i class="fa-solid fa-person-pregnant"></i></div><h4 class="font-bold">산부인과</h4></div>
+                <div class="p-6 bg-white rounded-2xl border border-gray-200 hover:border-brand hover:shadow-md transition" data-aos="zoom-in" data-aos-delay="300"><div class="text-4xl mb-3 text-brand"><i class="fa-solid fa-scissors"></i></div><h4 class="font-bold">미용실</h4></div>
+                <div class="p-6 bg-white rounded-2xl border border-gray-200 hover:border-brand hover:shadow-md transition" data-aos="zoom-in" data-aos-delay="350"><div class="text-4xl mb-3 text-brand"><i class="fa-solid fa-palette"></i></div><h4 class="font-bold">퍼스널컬러</h4></div>
+                <div class="p-6 bg-white rounded-2xl border border-gray-200 hover:border-brand hover:shadow-md transition" data-aos="zoom-in" data-aos-delay="400"><div class="text-4xl mb-3 text-brand"><i class="fa-solid fa-hand-sparkles"></i></div><h4 class="font-bold">네일</h4></div>
+                <div class="p-6 bg-white rounded-2xl border border-gray-200 hover:border-brand hover:shadow-md transition" data-aos="zoom-in" data-aos-delay="450"><div class="text-4xl mb-3 text-brand"><i class="fa-solid fa-spa"></i></div><h4 class="font-bold">에스테틱</h4></div>
+                <div class="p-6 bg-white rounded-2xl border border-gray-200 hover:border-brand hover:shadow-md transition" data-aos="zoom-in" data-aos-delay="500"><div class="text-4xl mb-3 text-brand"><i class="fa-solid fa-bed"></i></div><h4 class="font-bold">숙박</h4></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. 입점 프로세스 -->
     <section id="process" class="py-24 bg-brand-50/30 px-4">
         <div class="max-w-6xl mx-auto text-center">
             <h2 class="text-3xl md:text-4xl font-bold mb-4" data-aos="fade-up">누구나 아주 간단하게 시작할 수 있습니다</h2>
@@ -470,7 +581,6 @@
             
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 relative">
                 <div class="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-brand-100 -z-10 -translate-y-1/2"></div>
-                
                 <div class="bg-white p-8 rounded-2xl shadow-sm border border-brand-100 z-10 hover:border-brand hover:shadow-md transition" data-aos="zoom-in" data-aos-delay="100">
                     <div class="w-12 h-12 bg-gray-100 text-gray-500 rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4">1</div>
                     <h4 class="font-bold text-lg text-gray-800">회원 가입</h4>
@@ -491,7 +601,7 @@
         </div>
     </section>
 
-    <!-- 10. FAQ -->
+    <!-- 11. FAQ -->
     <section id="faq" class="py-24 bg-white px-4">
         <div class="max-w-4xl mx-auto">
             <div class="text-center mb-12" data-aos="fade-up">
@@ -542,7 +652,7 @@
         </div>
     </section>
 
-    <!-- 11. 하단 CTA -->
+    <!-- 12. 하단 CTA -->
     <section id="apply" class="py-24 relative overflow-hidden bg-gray-900 text-center px-4">
         <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand rounded-full blur-[150px] opacity-20 pointer-events-none"></div>
         
@@ -556,20 +666,18 @@
         </div>
     </section>
 
-    <!-- 플로팅 소셜 아이콘 (화면 우측 하단 고정) -->
-    <div class="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 flex flex-col gap-3">
-        <!-- 인스타그램 버튼 -->
-        <a href="https://www.instagram.com/beyoutrip_business/" target="_blank" class="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-500 rounded-full shadow-xl flex items-center justify-center text-white text-2xl hover:-translate-y-2 hover:shadow-2xl transition-all duration-300">
-            <i class="fa-brands fa-instagram"></i>
+    <!-- 13. 퀵 메뉴 (스크롤 시 표시) -->
+    <nav class="quick" aria-label="빠른 메뉴">
+        <a class="q-main" href="https://pf.kakao.com/_xcVewn" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4c-1.3 0-2.6-.3-3.7-.8L3 21l1.9-5.1A8.4 8.4 0 0 1 12 3.1a8.4 8.4 0 0 1 9 8.4Z"/></svg>
+            카톡상담
         </a>
-        
-        <!-- 네이버 블로그 버튼 -->
-        <a href="https://blog.naver.com/invested3518" target="_blank" class="w-12 h-12 md:w-14 md:h-14 bg-[#03C75A] rounded-full shadow-xl flex items-center justify-center text-white text-2xl font-black hover:-translate-y-2 hover:shadow-2xl transition-all duration-300">
-            <span class="block -mt-0.5">N</span>
-        </a>
-    </div>
+        <a class="q-sub" href="https://www.instagram.com/beyoutrip_business/" target="_blank" rel="noopener">Instagram</a>
+        <a class="q-sub" href="https://blog.naver.com/invested3518" target="_blank" rel="noopener">Blog</a>
+        <button class="q-top" type="button" aria-label="맨 위로">TOP</button>
+    </nav>
 
-    <!-- 12. 푸터-->
+    <!-- 14. 푸터 -->
     <footer class="bg-black text-gray-500 py-12 px-4 text-sm md:text-base border-t border-gray-800">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center md:items-start gap-6">
             <div>
@@ -599,14 +707,14 @@
             loop: true
         });
 
-        // 숏폼 비디오 슬라이더 (끊김 없이 부드럽게 계속 흘러가도록 수정)
+        // 숏폼 비디오 슬라이더
         var contentSwiper = new Swiper(".contentSwiper", {
             slidesPerView: "auto",
             spaceBetween: 20,
             loop: true,
-            speed: 4000, // 흘러가는 속도 (숫자가 클수록 느려짐. 기본 4000 권장)
+            speed: 4000, 
             autoplay: { 
-                delay: 0, // 멈추는 시간 없이 연속 재생
+                delay: 0, 
                 disableOnInteraction: false 
             },
         });
@@ -614,9 +722,49 @@
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
             });
         });
+
+        // 퀵 메뉴 및 헤더 스크롤 제어
+        (function(){
+            var h = document.getElementById('main-header'), 
+                q = document.querySelector('.quick'), 
+                hero = document.getElementById('hero'), 
+                tick = false;
+
+            function onScroll(){
+                if(tick) return; tick = true;
+                requestAnimationFrame(function(){
+                    var y = window.scrollY;
+                    if (h) {
+                        if (y > 8) h.classList.add('shadow-md');
+                        else h.classList.remove('shadow-md');
+                    }
+                    tick = false;
+                });
+            }
+            window.addEventListener('scroll', onScroll, {passive: true}); onScroll();
+            
+            // 퀵메뉴 표시 (히어로 섹션 지나면 표시)
+            if (q) {
+                if (hero && 'IntersectionObserver' in window) {
+                    new IntersectionObserver(function(e){
+                        q.classList.toggle('show', !e[0].isIntersecting);
+                    }, { threshold: 0 }).observe(hero);
+                } else {
+                    q.classList.add('show');
+                }
+            }
+
+            var qTop = document.querySelector('.q-top');
+            if (qTop) {
+                qTop.addEventListener('click', function(){
+                    window.scrollTo({top:0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'});
+                });
+            }
+        })();
     </script>
 </body>
 </html>
