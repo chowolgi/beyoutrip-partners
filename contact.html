@@ -237,7 +237,7 @@
         AOS.init({ once: false, offset: 50, duration: 800 });
     </script>
 
-    <!-- [NEW] 구글 스프레드시트 폼 연동 스크립트 -->
+    <!-- [수정됨] 구글 스프레드시트 폼 연동 스크립트 -->
     <script>
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault(); 
@@ -250,8 +250,8 @@
 
             const formData = new FormData(this);
 
-            // ★ 아래 따옴표 안에 3단계에서 복사한 '웹 앱 URL'을 반드시 붙여넣으세요! ★
-            const scriptUrl = 'https://script.google.com/macros/s/AKfycbx7gmpzqWh30eBa8L9e2zGTpMhQun9VYWJjTYZwMkMXXFoyupenwLVNt2c9yL9u1C5cYA/exec';
+            // 새 웹 앱 URL 적용 완료
+            const scriptUrl = 'https://script.google.com/macros/s/AKfycbzvoXNFNPiD4INPN8yFwo1ajWrDCWRNaST2Gdvv_ykR2bPsdNdQX2a9ACvRzpj_XzVshw/exec';
 
             fetch(scriptUrl, {
                 method: 'POST',
