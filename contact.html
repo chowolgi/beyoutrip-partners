@@ -115,7 +115,7 @@
             
             <form id="contactForm" class="space-y-8">
                 
-                <!-- [NEW] 서비스 선택 (카드형 라디오 버튼) -->
+                <!-- 서비스 선택 (카드형 라디오 버튼) -->
                 <div class="mb-4">
                     <label class="block text-sm font-bold text-gray-700 mb-3">어떤 서비스를 문의하시나요? <span class="text-brand">*</span></label>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -153,7 +153,6 @@
                         <input type="text" id="company" name="company" placeholder="예) 상승성형외과" required class="form-input">
                     </div>
                     <div>
-                        <!-- [NEW] 업종 텍스트 직접 입력으로 변경 -->
                         <label for="industry" class="block text-sm font-bold text-gray-700 mb-2">업종 <span class="text-brand">*</span></label>
                         <input type="text" id="industry" name="industry" placeholder="예) 피부과, 뷰티/네일샵 등" required class="form-input">
                     </div>
@@ -239,7 +238,7 @@
         AOS.init({ once: false, offset: 50, duration: 800 });
     </script>
 
-    <!-- [수정됨] 구글 스프레드시트 폼 연동 스크립트 -->
+    <!-- 구글 스프레드시트 폼 연동 스크립트 -->
     <script>
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault(); 
@@ -253,7 +252,7 @@
             const formData = new FormData(this);
 
             // 새 웹 앱 URL 적용 완료
-            const scriptUrl = 'https://script.google.com/macros/s/AKfycbzhi7OwJ2kUPpBkxXKEjO5zzeBBwiJTzrEp_iCi9G_NAiBBtjZNcnfP0IFb9MUq131U/exec';
+            const scriptUrl = 'https://script.google.com/macros/s/AKfycbyz_Dfou_9nzJAFT3sRe4jzeZoFwJTEWHvrv0igNjMVifTIDBIRcIpF8J2kCrfIf15Nsw/exec';
 
             fetch(scriptUrl, {
                 method: 'POST',
